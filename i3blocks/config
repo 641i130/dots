@@ -1,0 +1,37 @@
+#[click]
+#full_text=Click me!
+#command=echo "Got clicked with button $button"
+#color=#F79494
+
+# Learn japanese bruh refreshes in 12 hour intervals
+[time]
+command=python "/home/carrot/CS Development/japanese-date-time/start.py"
+color=#E367FC
+interval=43200
+
+# RAM Usage
+[memory]
+command=free -m|sed -n '/Mem/p'|awk '{print $3/1000}'
+label=Wham: 
+interval=30
+color=#08FF42
+
+
+# Guess the weather hourly
+[weather]
+command=curl 'wttr.in/Chicago?format=3' | cut -c 10-
+#curl -Ss 'https://wttr.in?0&T&Q/Chicago' | cut -c 16- | head -2 | xargs echo
+interval=3600
+color=#A4C2F4
+
+# Query my default IP address only on startup
+[ip]
+command=ip -4 -o addr show enp40s0 | awk '{print $4}'
+label=IP: 
+interval=once
+color=#91E78B
+
+# Update time every 1 second
+[time]
+command=date "+%d/%m/%y %T"
+interval=1
