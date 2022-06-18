@@ -2,20 +2,38 @@
 # Super
 set $mod Mod4
 # Alt
-set $mod1 Mod1 
+set $mod1 Mod1
+set $mod3 Control
+
+# PROTECT YOUR EYES! USE REDSHIFT!
+#exec --no-startup-id redshift -t 1000:2000
+exec --no-startup-id nm-applet
+
+bindsym --whole-window $mod+button3 floating toggle
+bindsym --whole-window $mod+button2 kill
+
+
+# coarse control - resize window with mouse. scroll = up & down. shift = left & right.
+bindsym --whole-window $mod+button4             resize shrink height 20 px or 20 ppt
+bindsym --whole-window $mod+button5             resize grow height 20 px or 20 ppt
+bindsym --whole-window $mod+Shift+button4       resize shrink width 20 px or 20 ppt
+bindsym --whole-window $mod+Shift+button5       resize grow width 20 px or 20 ppt
+# fine control  - resize window with mouse. scroll = up & down. shift = left & right.
+bindsym --whole-window $mod+Ctrl+button4             resize shrink height 5 px or 5 ppt
+bindsym --whole-window $mod+Ctrl+button5             resize grow height 5 px or 5 ppt
+bindsym --whole-window $mod+Ctrl+Shift+button4       resize shrink width 5 px or 5 ppt
+bindsym --whole-window $mod+Ctrl+Shift+button5       resize grow width 5 px or 5 ppt
+
 
 # COLOR SETTINGS
 # class                 border  backgr. text    indicator child_border
-client.urgent           #000000 #161616 #ffffff #161616   #161616          
-client.focused          #000000 #000000 #ffffff #000000   #000000
-client.focused_inactive #333333 #222222 #888888 #292d2e   #222222
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #ff0000 #161616 #ffffff #161616   #161616
+client.focused          #E367FC #000000 #ffffff #000000   #000000
+client.focused_inactive #000000 #222222 #888888 #292d2e   #222222
+client.unfocused        #000000 #222222 #888888 #292d2e   #222222
 
 # Font and size
 font pango:monospace 8
-
-# IDK What this is
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # For network manager aka WiFi Picker on lappy-toppy
 exec --no-startup-id nm-applet
@@ -27,6 +45,12 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
+# Bluetooth Controls!
+#bindsym XF86AudioStop exec playerctl --all-players stop
+bindsym XF86AudioPlay exec playerctl --all-players play-pause
+bindsym XF86AudioPrev exec playerctl --all-players previous
+bindsym XF86AudioNext exec playerctl --all-players next
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -37,16 +61,16 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+p exec pavucontrol
 
 # Kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+Shift+apostrophe kill
 
 # ROFI IS BETTER THAN DMENU
-bindsym $mod+d exec rofi -show drun -show-icons -font "courier new medium 12" -display-drun "🥕" -theme /home/carrot/.config/rofi/config/slate.rasi
+bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" -theme .config/rofi/slate.rasi
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+bindsym $mod+semicolon focus left
+bindsym $mod+q focus down
+bindsym $mod+j focus up
+bindsym $mod+k focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -55,10 +79,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+semicolon move left
+bindsym $mod+Shift+q move down
+bindsym $mod+Shift+j move up
+bindsym $mod+Shift+k move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -67,10 +91,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+u split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -94,52 +118,64 @@ bindsym $mod+space focus mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $ws1 "一"
-set $ws2 "二"
-set $ws3 "三"
-set $ws4 "四"
-set $ws5 "五"
-set $ws6 "六"
-set $ws7 "七"
-set $ws8 "八"
-set $ws9 "九"
-set $ws10 "十"
+#set $ws1 "一"
+#set $ws2 "二"
+#set $ws3 "三"
+#set $ws4 "四"
+#set $ws5 "五"
+#set $ws6 "六"
+#set $ws7 "七"
+#set $ws8 "八"
+#set $ws9 "九"
+#set $ws10 "十"
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
 
 # switch to workspace
-bindsym $mod+1 workspace $ws1
-bindsym $mod+2 workspace $ws2
-bindsym $mod+3 workspace $ws3
-bindsym $mod+4 workspace $ws4
-bindsym $mod+5 workspace $ws5
-bindsym $mod+6 workspace $ws6
-bindsym $mod+7 workspace $ws7
-bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace $ws9
-bindsym $mod+0 workspace $ws10
+#bindsym $mod+1 workspace $ws1
+#bindsym $mod+2 workspace $ws2
+#bindsym $mod+3 workspace $ws3
+#bindsym $mod+4 workspace $ws4
+#bindsym $mod+5 workspace $ws5
+#bindsym $mod+6 workspace $ws6
+#bindsym $mod+7 workspace $ws7
+#bindsym $mod+8 workspace $ws8
+#bindsym $mod+9 workspace $ws9
+#bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace $ws1
-bindsym $mod+Shift+2 move container to workspace $ws2
-bindsym $mod+Shift+3 move container to workspace $ws3
-bindsym $mod+Shift+4 move container to workspace $ws4
-bindsym $mod+Shift+5 move container to workspace $ws5
-bindsym $mod+Shift+6 move container to workspace $ws6
-bindsym $mod+Shift+7 move container to workspace $ws7
-bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace $ws9
-bindsym $mod+Shift+0 move container to workspace $ws10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 # Enforce Program Launch Location
-assign [class="discord"] $ws2
-assign [class="Firefox"] $ws1
-assign [class="Steam"] $ws3
+assign [class="discord"] 2
+assign [class="Firefox"] 1
+assign [class="Steam"] 3
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec --no-startup-id archlinux-logout
 
 # resize window (you can also use the mouse for that)
 
@@ -170,72 +206,42 @@ mode "resize" {
 }
 
 # Make the currently focused window a scratchpad
-bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+Shift+i move scratchpad
 
 # Show the first scratchpad window
-bindsym $mod+minus scratchpad show
+bindsym $mod+i scratchpad show
 
 # Quick key for starting Firefox
 bindsym $mod1+Shift+f exec firefox
 
 # Quick key for starting Discord
-bindsym $mod1+shift+d exec discord
+bindsym $mod1+shift+d exec discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy --no-sandbox
+
+
+# PICOM
+exec_always --no-startup-id picom --config ~/.config/i3/picom.conf
+bindsym $mod+Shift+x exec ~/Scripts/picom-toggle.sh
+
 
 # Move windows to different screens
 bindsym $mod+Shift+a move workspace to output left
 bindsym $mod+Shift+o move workspace to output up
 
 # Lock i3
-bindsym $mod+Shift+x exec i3lock -c 000000
+bindsym $mod+Shift+l exec i3lock -c 000000
 
 # Open calendar
 bindsym $mod+c exec gsimplecal
 
-# Polybar when I use it
-#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
-bar {
-    output DisplayPort-1
-    position bottom
-    colors {
-	inactive_workspace #000000 #000000 #888888
-        active_workspace  #333333 #222222 #888888
-        focused_workspace   #000000 #000000 #FFFFFF
-    }
-       status_command i3blocks
-}
-
-bar {
-    output DisplayPort-0
-    tray_output primary 
-    position top
-    colors {
-	inactive_workspace #000000 #000000 #888888
-        active_workspace  #333333 #222222 #888888
-        focused_workspace   #000000 #000000 #FFFFFF
-    }
-       status_command i3blocks
-}
-
-bar {
-    output VNC-0
-    tray_output primary 
-    position top
-    colors {
-	inactive_workspace #000000 #000000 #888888
-        active_workspace  #333333 #222222 #888888
-        focused_workspace   #000000 #000000 #FFFFFF
-    }
-       status_command i3blocks
-}
+# POLY BAR
+exec_always .config/polybar/launch.sh
 
 # Window floaty
-#for_window [title="Emoji-keyboard"] resize set 480 480
-#for_window [title="Emoji-keyboard"] floating enable
 floating_minimum_size 75 x 20
 floating_maximum_size -1 x -1
-for_window [class="emoji-keyboard"] floating enable
-for_window [class="emoji-keyboard"] resize set 75 x 20
+
+# Forced floaty windows
+#for_window [class="RAIL"] floating enable
 
 # Set keyboard layout automagically
 #exec_always setxkbmap -layout "us" -variant "dvorak"
@@ -243,22 +249,73 @@ exec_always setxkbmap -layout "us"
 #bindsym $mod1+shift+2 exec setxkbmap -layout "us" -variant "dvorak"
 
 # Invert screen code
-#bindsym $mod+i exec xcalib -invert -alter
-bindsym $mod+i exec invertsh
+bindsym $mod+minus exec xcalib -invert -alter
+#bindsym $mod+minus exec invertsh
 
 # Launch Dolphin file explorer
 bindsym --release $mod+period exec dolphin
 
 # Screenshot Script sadly it mutes audio sometimes
-bindsym --release $mod+shift+S exec ~/Scripts/ss.sh
+bindsym --release $mod+shift+S exec spectacle -r -c
+
+# Setup System for remote connection
+bindsym --release $mod+shift+f exec ~/Scripts/vncarandr.sh
+
+# Signal
+bindsym --release $mod+shift+g exec signal-desktop
+
+# Kill Polybar for focus mode
+bindsym --release $mod+shift+m exec ~/Scripts/toggle_polybar.sh
+
+# Hide wallpaper
+bindsym --release $mod+shift+b exec feh --bg-fill /home/koe/Pictures/Wallpapers/black.jpg
+
+bindsym --release $mod+shift+w exec ~/Scripts/wallpaper.sh
+
+bindsym --release $mod+shift+d exec ~/Scripts/dailyjournal.sh
+
+bindsym --release $mod+shift+t exec typora todo.md
+
+bindsym --release $mod+shift+v exec ~/Scripts/clipboard_type.sh
+bindsym --release $mod+shift+y exec ~/Scripts/ytsort.sh
 
 #exec_always setxkbmap -option caps:backspace
 
-# 2, 1440p monitors [portrait] [landscape]
-exec_always xrandr --output DisplayPort-0 --mode 2560x1440 --rate 144 --pos 1440x292 --rotate normal --output DisplayPort-1 --mode 2560x1440 --rate 144 --pos 0x0 --rotate left --output HDMI-A-0 --off --output HDMI-A-1 --off --output DVI-D-0 --off --output DVI-I-1-0 --off --output DVI-I-1-1 --off --output HDMI-1-0 --off --output DP-1-0 --off --output DP-1-1 --off --output DP-1-2 --off --output DP-1-3 --off --output DP-1-4 --off --output DP-1-5 --off
+# AMD GPU
+#exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --rate 144 --pos 1440x398 --rotate normal --output DisplayPort-1 --mode 2560x1440 --rate 144 --pos 0x0 --rotate right --output HDMI-A-1 --off --output HDMI-A-2 --off --output DVI-D-0 --off --output DP-1-2 --off --output DP-1-3 --off --output DP-1-4 --off --output HDMI-1-1 --off
+# NvidiaGPU
+#exec_always --no-startup-id xrandr --output HDMI-0 --off --output DP-0 --mode 2560x1440 --pos 0x0 --rotate right --output DP-1 --off --output DP-2 --primary --mode 2560x1440 --pos 1440x420 --rotate normal --output DP-3 --off --output DP-4 --off --output DP-5 --off
+#DOUBLE
+# OGGG
+#exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --rate 144 --pos 0x1440 --rotate normal --output DisplayPort-1 --mode 2560x1440 --rate 144 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output HDMI-A-1 --off --output DVI-D-0 --off
+# 3 monitor
+exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --rate 143.91 --pos 1080x1440 --rotate normal --output DisplayPort-1 --mode 2560x1440 --rate 143.91 --pos 1080x0 --rotate normal --output HDMI-A-0 --off --output HDMI-A-1 --off --output DVI-D-0 --rate 60.00 --mode 1920x1080 --pos 0x0 --rotate right
+
+
+# SINGLE MONITRO
+#exec_always xrandr --setmonitor DisplayPort-0 auto DisplayPort-0 DisplayPort-1
+
+# Un block bluetooth
+exec_always --no-startup-id rfkill unblock bluetooth
 
 # Start up anthy / ibus
+exec --no-startup-id lxsession
 exec_always anthy_agent
+exec_always thunderbird
 exec_always ibus-daemon -drx
-#exec_always export MOZ_WEBRENDER=1
-exec_always /home/carrot/Scripts/dailyjournal.sh
+exec_always ~/Scripts/dailyjournal.sh
+exec_always ~/Scripts/wallpaper.sh
+exec_always /usr/lib/kdeconnectd
+exec_always blueberry-tray
+#exec_always blueman-applet
+exec_always firewall-applet
+#exec_always ~/Scripts/videowallpaper.sh
+
+#border_radius 10
+bindsym $mod+b exec i3-msg gaps inner all toggle 50
+#default_border none
+focus_follows_mouse yes
+
+
+# Smart borders (draw borders around container only if it is not the only container on this workspace)
+# on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
