@@ -64,7 +64,8 @@ bindsym $mod+Shift+p exec pavucontrol
 bindsym $mod+Shift+apostrophe kill
 
 # ROFI IS BETTER THAN DMENU
-bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" -theme .config/rofi/slate.rasi
+#bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" -theme .config/rofi/slate.rasi
+bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" 
 
 # change focus
 bindsym $mod+semicolon focus left
@@ -167,7 +168,7 @@ bindsym $mod+Shift+0 move container to workspace 10
 # Enforce Program Launch Location
 assign [class="discord"] 2
 assign [class="Firefox"] 1
-assign [class="Steam"] 3
+assign [class="Steam"] 7
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -219,8 +220,8 @@ bindsym $mod1+shift+d exec discord --ignore-gpu-blocklist --disable-features=Use
 
 
 # PICOM
-exec_always --no-startup-id picom --config ~/.config/i3/picom.conf
 bindsym $mod+Shift+x exec ~/Scripts/picom-toggle.sh
+exec_always ~/Scripts/picom-toggle.sh
 
 
 # Move windows to different screens
@@ -256,19 +257,17 @@ bindsym $mod+minus exec xcalib -invert -alter
 bindsym --release $mod+period exec dolphin
 
 # Screenshot Script sadly it mutes audio sometimes
-bindsym --release $mod+shift+S exec spectacle -r -c
+bindsym --release $mod+shift+S exec ~/Scripts/ss.sh
 
 # Setup System for remote connection
 bindsym --release $mod+shift+f exec ~/Scripts/vncarandr.sh
 
-# Signal
-bindsym --release $mod+shift+g exec signal-desktop
 
 # Kill Polybar for focus mode
 bindsym --release $mod+shift+m exec ~/Scripts/toggle_polybar.sh
 
 # Hide wallpaper
-bindsym --release $mod+shift+b exec feh --bg-fill /home/koe/Pictures/Wallpapers/black.jpg
+bindsym --release $mod+shift+b exec feh --bg-fill ~/Pictures/Wallpapers/black.jpg
 
 bindsym --release $mod+shift+w exec ~/Scripts/wallpaper.sh
 
@@ -280,17 +279,10 @@ bindsym --release $mod+shift+v exec ~/Scripts/clipboard_type.sh
 bindsym --release $mod+shift+y exec ~/Scripts/ytsort.sh
 
 #exec_always setxkbmap -option caps:backspace
+exec_always xrandr --output HDMI-0 --off --output DP-2 --primary --mode 2560x1440 --rate 143.91 --pos 1440x480 --rotate normal --output DP-1 --off --output DP-0 --mode 2560x1440 --rate 143.91  --pos 0x0 --rotate left --output DP-3 --off --output DP-4 --off --output DP-5 --off
 
-# AMD GPU
-#exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --rate 144 --pos 1440x398 --rotate normal --output DisplayPort-1 --mode 2560x1440 --rate 144 --pos 0x0 --rotate right --output HDMI-A-1 --off --output HDMI-A-2 --off --output DVI-D-0 --off --output DP-1-2 --off --output DP-1-3 --off --output DP-1-4 --off --output HDMI-1-1 --off
-# NvidiaGPU
-#exec_always --no-startup-id xrandr --output HDMI-0 --off --output DP-0 --mode 2560x1440 --pos 0x0 --rotate right --output DP-1 --off --output DP-2 --primary --mode 2560x1440 --pos 1440x420 --rotate normal --output DP-3 --off --output DP-4 --off --output DP-5 --off
-#DOUBLE
-# OGGG
-#exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --rate 144 --pos 0x1440 --rotate normal --output DisplayPort-1 --mode 2560x1440 --rate 144 --pos 0x0 --rotate normal --output HDMI-A-0 --off --output HDMI-A-1 --off --output DVI-D-0 --off
-# 3 monitor
-exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --rate 143.91 --pos 1080x1440 --rotate normal --output DisplayPort-1 --mode 2560x1440 --rate 143.91 --pos 1080x0 --rotate normal --output HDMI-A-0 --off --output HDMI-A-1 --off --output DVI-D-0 --rate 60.00 --mode 1920x1080 --pos 0x0 --rotate right
-
+# Disable main screen
+bindsym --release $mod+shift+g exec xrandr --output HDMI-0 --off --output DP-0 --primary --mode 2560x1440 --rate 143.91 --pos 0x0 --rotate left --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off
 
 # SINGLE MONITRO
 #exec_always xrandr --setmonitor DisplayPort-0 auto DisplayPort-0 DisplayPort-1
@@ -301,6 +293,7 @@ exec_always --no-startup-id rfkill unblock bluetooth
 # Start up anthy / ibus
 exec --no-startup-id lxsession
 exec_always anthy_agent
+exec_always dunst
 exec_always thunderbird
 exec_always ibus-daemon -drx
 exec_always ~/Scripts/dailyjournal.sh
