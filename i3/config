@@ -64,8 +64,8 @@ bindsym $mod+Shift+p exec pavucontrol
 bindsym $mod+Shift+apostrophe kill
 
 # ROFI IS BETTER THAN DMENU
-#bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" -theme .config/rofi/slate.rasi
-bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" 
+bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" -theme .config/rofi/slate.rasi
+#bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" 
 
 # change focus
 bindsym $mod+semicolon focus left
@@ -175,36 +175,8 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec --no-startup-id archlinux-logout
-
-# resize window (you can also use the mouse for that)
-
-bindsym $mod+r mode "resize"
-
-mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec --no-startup-id archlinux-logout
 
 # Make the currently focused window a scratchpad
 bindsym $mod+Shift+i move scratchpad
@@ -216,7 +188,8 @@ bindsym $mod+i scratchpad show
 bindsym $mod1+Shift+f exec firefox
 
 # Quick key for starting Discord
-bindsym $mod1+shift+d exec discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy --no-sandbox
+#bindsym $mod1+shift+d exec discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy --no-sandbox
+bindsym $mod1+shift+d exec discord 
 
 
 # PICOM
