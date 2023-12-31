@@ -170,6 +170,9 @@ assign [class="discord"] 2
 assign [class="Firefox"] 1
 assign [class="Steam"] 7
 
+# Moonlight seperate
+assign [class="com.moonlight_stream.Moonlight"] 11
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -202,7 +205,10 @@ bindsym $mod+Shift+a move workspace to output left
 bindsym $mod+Shift+o move workspace to output up
 
 # Lock i3
-bindsym $mod+Shift+l exec i3lock -c 000000
+#bindsym $mod+Shift+l exec i3lock -c 000000
+bindsym $mod+Shift+l exec ~/Scripts/lock.sh
+#exec xautolock -detectsleep -time 5 -locker "~/Scripts/lock.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'locking screen in 30 seconds'"
+
 
 # Open calendar
 bindsym $mod+c exec gsimplecal
@@ -227,38 +233,43 @@ bindsym $mod+minus exec xcalib -invert -alter
 #bindsym $mod+minus exec invertsh
 
 # Launch Dolphin file explorer
-bindsym --release $mod+period exec dolphin
+bindsym --release $mod+period exec DESKTOP_SESSION=kde dolphin
 
 # Screenshot Script sadly it mutes audio sometimes
 bindsym --release $mod+shift+S exec ~/Scripts/ss.sh
 
 # Setup System for remote connection
-bindsym --release $mod+shift+f exec ~/Scripts/vncarandr.sh
+bindsym --release $mod+shift+f exec xrandr --output DP-1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-2 --off --output DP-3 --off --output HDMI-1 --off
 
 
 # Kill Polybar for focus mode
 bindsym --release $mod+shift+m exec ~/Scripts/toggle_polybar.sh
 
 # Hide wallpaper
-bindsym --release $mod+shift+b exec feh --bg-fill ~/Pictures/Wallpapers/black.jpg
+bindsym --release $mod+shift+b exec feh --bg-fill /HDD/Pictures/black.png
+#exec_always feh --bg-fill ~/Pictures/Wallpapers/black.jpg
 
-bindsym --release $mod+shift+w exec ~/Scripts/wallpaper.sh
-
+bindsym --release $mod+shift+w exec ~/Scripts/wallpaper.sh hutao
+#exec_always ~/Scripts/wallpaper.sh hutao
+#bindsym --release $mod+shift+w exec ~/Scripts/wallpaper-single.sh
+exec_always ~/Scripts/wallpaper-single.sh
 bindsym --release $mod+shift+d exec ~/Scripts/dailyjournal.sh
 
-bindsym --release $mod+shift+t exec typora todo.md
+#bindsym --release $mod+shift+t exec typora todo.md
 
 bindsym --release $mod+shift+v exec ~/Scripts/clipboard_type.sh
-bindsym --release $mod+shift+y exec ~/Scripts/ytsort.sh
+#bindsym --release $mod+shift+y exec ~/Scripts/ytsort.sh
 
-#exec_always setxkbmap -option caps:backspace
-exec_always xrandr --output HDMI-0 --off --output DP-2 --primary --mode 2560x1440 --rate 143.91 --pos 1440x480 --rotate normal --output DP-1 --off --output DP-0 --mode 2560x1440 --rate 143.91  --pos 0x0 --rotate left --output DP-3 --off --output DP-4 --off --output DP-5 --off
-
+# Main screen setup |-
+exec_always xrandr --output DP-1 --primary --mode 2560x1440 --rate 143.91 --pos 1440x629 --rotate normal --output DP-2 --mode 2560x1440 --rate 143.91 --pos 0x0 --rotate left --output DP-3 --off --output HDMI-1 --off
+# TABLET HUION GRAPHIC SCREEN
+bindsym --release $mod+shift+t exec xrandr --output DP-1 --rate 143.91 --primary --mode 2560x1440 --pos 1440x629 --rotate normal --output DP-2 --rate 143.91 --mode 2560x1440 --pos 0x0 --rotate left --output HDMI-1 --scale-from 2560x1440 --scale 2x2 --rate 60 --mode 1920x1080 --same-as DP-1 --rotate normal && ~/Scripts/huion.sh
 # Disable main screen
-bindsym --release $mod+shift+g exec xrandr --output HDMI-0 --off --output DP-0 --primary --mode 2560x1440 --rate 143.91 --pos 0x0 --rotate left --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off
+bindsym --release $mod+shift+g exec xrandr --output HDMI-0 --off --output DP-0 --primary --mode 2560x1440 --rate 143.91 --pos 0x0 --rotate left --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output HDMI-A-0 --off
 
 # SINGLE MONITRO
 #exec_always xrandr --setmonitor DisplayPort-0 auto DisplayPort-0 DisplayPort-1
+#exec_always xrandr --output DisplayPort-0 --off --output DisplayPort-1 --off --output DisplayPort-2 --primary --mode 2560x1440 --rate 143.91 --pos 0x0 --rotate normal --output HDMI-A-0 --off
 
 # Un block bluetooth
 exec_always --no-startup-id rfkill unblock bluetooth
@@ -267,14 +278,13 @@ exec_always --no-startup-id rfkill unblock bluetooth
 exec --no-startup-id lxsession
 exec_always anthy_agent
 exec_always dunst
+exec_always redshift -x
 exec_always thunderbird
-exec_always ibus-daemon -drx
-exec_always ~/Scripts/dailyjournal.sh
-exec_always ~/Scripts/wallpaper.sh
-exec_always /usr/lib/kdeconnectd
-exec_always blueberry-tray
-#exec_always blueman-applet
-exec_always firewall-applet
+#exec_always ibus-daemon -drx
+exec_always fcitx5 -d
+#exec_always ~/Scripts/dailyjournal.sh
+#exec_always /usr/lib/kdeconnectd
+#exec_always firewall-applet
 #exec_always ~/Scripts/videowallpaper.sh
 
 #border_radius 10
@@ -282,6 +292,8 @@ bindsym $mod+b exec i3-msg gaps inner all toggle 50
 #default_border none
 focus_follows_mouse yes
 
+# Weird thing?
+exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
