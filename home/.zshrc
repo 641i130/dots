@@ -71,8 +71,8 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  zsh-autosuggestions
+	git
+	zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -102,7 +102,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5C5C5C"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -118,4 +117,14 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+export GTK_IM_MODULE='fcitx'
+export QT_IM_MODULE='fcitx'
+export SDL_IM_MODULE='fcitx'
+export XMODIFIERS='@im=fcitx'
+export GLFW_IM_MODULE='ibus'
+export TERMINAL='xfce4-terminal'
+export QT_QPA_PLATFORMTHEME='qt5ct'
+#export QT_QPA_PLATFORMTHEME=qt6ct
+. "$HOME/.cargo/env"
 
