@@ -11,17 +11,26 @@ Pull in the .zshrc exports. Add mozc to the fcitx -d tray config tool.
 
 ### General Other Steps:
 zsh-autosuggestions
+
 `git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions`
+
 oh-my-zsh
+
 `sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 python-conda
+
 `yay -S python-conda --noconfirm`
+
 rust
+
 `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+
 yay
-`git clone https://aur.archlinux.org/yay-bin.git`
-`cd yay-bin`
-`makepkg -si`
+```bash
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin
+makepkg -si
+```
 
 ### Huge package list of things I need:
-`kitty dolphin discord firefox neovim vim iptables redshift curl wget bind p7zip ark 
+`pacman -S --noconfirm kitty dolphin discord firefox neovim vim iptables redshift curl wget bind p7zip ark xclip imagemagick zathura-pdf-poppler yt-dlp obsidian libreoffice-still signal-desktop telegram-desktop mpv cronie xrandr rofi polybar keepassxc picom dunst mpv-mpris playerctl git base-devel network-manager-applet sshfs thunderbird`
