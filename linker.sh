@@ -10,7 +10,7 @@ for folder in dunst i3 polybar redshift rofi; do
 done
 
 # Link home files here
-rm /home/$USER/.zshrc
-rm /home/$USER/.zshenv
-rm /home/$USER/.Xresources
-ln -s /home/$USER/dots/home/* /home/$USER/ 
+rm /home/$USER/.zshrc 2>/dev/null
+rm /home/$USER/.zshenv 2>/dev/null
+rm /home/$USER/.Xresources 2>/dev/null
+ln -s /home/$USER/dots/home/{*,.*} /home/$USER/ 

@@ -166,6 +166,7 @@
     picom
     rofi
     polybar
+    usbutils
   ];
 
   fonts.packages = with pkgs; [
