@@ -5,8 +5,6 @@ set $mod Mod4
 set $mod1 Mod1
 set $mod3 Control
 
-# PROTECT YOUR EYES! USE REDSHIFT!
-#exec --no-startup-id redshift -t 1000:2000
 exec --no-startup-id nm-applet
 
 bindsym --whole-window $mod+button3 floating toggle
@@ -64,7 +62,8 @@ bindsym $mod+Shift+p exec pavucontrol
 bindsym $mod+Shift+apostrophe kill
 
 # ROFI IS BETTER THAN DMENU
-bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" -theme .config/rofi/slate.rasi
+bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕"
+#bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" -theme .config/rofi/slate.rasi
 #bindsym $mod+d exec rofi -show drun -show-icons -font "Fira Mono 12" -display-drun "🥕" 
 
 # change focus
@@ -233,7 +232,7 @@ bindsym $mod+minus exec xcalib -invert -alter
 #bindsym $mod+minus exec invertsh
 
 # Launch Dolphin file explorer
-bindsym --release $mod+period exec DESKTOP_SESSION=kde dolphin
+bindsym --release $mod+period exec dolphin
 
 # Screenshot Script sadly it mutes audio sometimes
 bindsym --release $mod+shift+S exec ~/Scripts/ss.sh
@@ -253,19 +252,20 @@ bindsym --release $mod+shift+w exec ~/Scripts/wallpaper.sh hutao
 #exec_always ~/Scripts/wallpaper.sh hutao
 #bindsym --release $mod+shift+w exec ~/Scripts/wallpaper-single.sh
 exec_always ~/Scripts/wallpaper-single.sh
-bindsym --release $mod+shift+d exec ~/Scripts/dailyjournal.sh
+#bindsym --release $mod+shift+d exec ~/Scripts/dailyjournal.sh
 
-#bindsym --release $mod+shift+t exec typora todo.md
+bindsym --release $mod+shift+t exec typora todo.md
 
 bindsym --release $mod+shift+v exec ~/Scripts/clipboard_type.sh
 #bindsym --release $mod+shift+y exec ~/Scripts/ytsort.sh
 
 # Main screen setup |-
-exec_always xrandr --output DP-1 --primary --mode 2560x1440 --rate 143.91 --pos 1440x629 --rotate normal --output DP-2 --mode 2560x1440 --rate 143.91 --pos 0x0 --rotate left --output DP-3 --off --output HDMI-1 --off
+exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --pos 1440x713 --rotate normal --output DisplayPort-1 --mode 2560x1440 --pos 0x0 --rotate left --output DisplayPort-2 --off --output HDMI-A-0 --off
+
 # TABLET HUION GRAPHIC SCREEN
-bindsym --release $mod+shift+t exec xrandr --output DP-1 --rate 143.91 --primary --mode 2560x1440 --pos 1440x629 --rotate normal --output DP-2 --rate 143.91 --mode 2560x1440 --pos 0x0 --rotate left --output HDMI-1 --scale-from 2560x1440 --scale 2x2 --rate 60 --mode 1920x1080 --same-as DP-1 --rotate normal && ~/Scripts/huion.sh
+bindsym --release $mod+$mod1+shift+t exec xrandr --output DisplayPort-0 --rate 143.91 --primary --mode 2560x1440 --pos 1440x629 --rotate normal --output DisplayPort-1 --rate 143.91 --mode 2560x1440 --pos 0x0 --rotate left --output HDMI-A-0 --scale-from 2560x1440 --scale 2x2 --rate 60 --mode 1920x1080 --same-as DisplayPort-0 --rotate inverted && ~/Scripts/huion.sh
 # Disable main screen
-bindsym --release $mod+shift+g exec xrandr --output HDMI-0 --off --output DP-0 --primary --mode 2560x1440 --rate 143.91 --pos 0x0 --rotate left --output DP-1 --off --output DP-2 --off --output DP-3 --off --output DP-4 --off --output DP-5 --off --output HDMI-A-0 --off
+bindsym --release $mod+shift+g exec xrandr --output DisplayPort-0 --primary --mode 1920x1080 --output DisplayPort-1 --off --output HDMI-A-0 --off
 
 # SINGLE MONITRO
 #exec_always xrandr --setmonitor DisplayPort-0 auto DisplayPort-0 DisplayPort-1
@@ -281,7 +281,7 @@ exec_always dunst
 exec_always redshift -x
 exec_always thunderbird
 #exec_always ibus-daemon -drx
-exec_always fcitx5 -d
+exec_always fcitx -d
 #exec_always ~/Scripts/dailyjournal.sh
 #exec_always /usr/lib/kdeconnectd
 #exec_always firewall-applet
@@ -294,6 +294,9 @@ focus_follows_mouse yes
 
 # Weird thing?
 exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
+
+# polkit
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)

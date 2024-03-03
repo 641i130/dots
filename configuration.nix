@@ -30,6 +30,11 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "ja_JP.UTF-8/UTF-8"
+    ];
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -44,9 +49,7 @@
   i18n.inputMethod.enabled = "fcitx5";
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
-  # Enable the KDE Plasma Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
   services.xserver.windowManager.i3.enable = true;
 
   # Configure keymap in X11
@@ -56,11 +59,12 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing.enable = false;
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  nixpkgs.config.pulseaudio = true; # enable needed for polybar
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -91,7 +95,7 @@
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.user = "caret";
+  #services.xserver.displayManager.autoLogin.user = "caret";
 
 
   # Allow unfree packages
@@ -119,9 +123,6 @@
     oh-my-zsh
     zsh-autosuggestions
     gnome.gdm
-    picom
-    rofi
-    polybar
     dunst
     bind
     p7zip
@@ -160,7 +161,13 @@
     fcitx5-configtool
     python3
     networkmanagerapplet
+    polkit_gnome
+    i3
+    picom
+    rofi
+    polybar
   ];
+
   fonts.packages = with pkgs; [
     noto-fonts
     fira-mono
@@ -207,11 +214,30 @@
  
   # List services that you want to enable:
 
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+ systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart =
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
+    };
+  };
 
+  
+
+  # Enable the OpenSSH daemon.
+  services.openssh.enable = true;
+  
   # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  networking.firewall.allowedTCPPorts = [ 22 ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
