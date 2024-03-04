@@ -245,7 +245,7 @@ bindsym --release $mod+shift+f exec xrandr --output DP-1 --mode 1920x1080 --pos 
 bindsym --release $mod+shift+m exec ~/Scripts/toggle_polybar.sh
 
 # Hide wallpaper
-bindsym --release $mod+shift+b exec feh --bg-fill /HDD/Pictures/black.png
+bindsym --release $mod+shift+b exec feh --bg-fill /HDD/Media/Pictures/black.png
 #exec_always feh --bg-fill ~/Pictures/Wallpapers/black.jpg
 
 bindsym --release $mod+shift+w exec ~/Scripts/wallpaper.sh hutao
@@ -260,7 +260,7 @@ bindsym --release $mod+shift+v exec ~/Scripts/clipboard_type.sh
 #bindsym --release $mod+shift+y exec ~/Scripts/ytsort.sh
 
 # Main screen setup |-
-exec_always xrandr --output DisplayPort-0 --primary --mode 2560x1440 --pos 1440x713 --rotate normal --output DisplayPort-1 --mode 2560x1440 --pos 0x0 --rotate left --output DisplayPort-2 --off --output HDMI-A-0 --off
+exec_always xrandr --output DisplayPort-0 --rate 143.91 --primary --mode 2560x1440 --pos 1440x713 --rotate normal --output DisplayPort-1 --rate 143.91 --mode 2560x1440 --pos 0x0 --rotate left --output DisplayPort-2 --off --output HDMI-A-0 --off
 
 # TABLET HUION GRAPHIC SCREEN
 bindsym --release $mod+$mod1+shift+t exec xrandr --output DisplayPort-0 --rate 143.91 --primary --mode 2560x1440 --pos 1440x629 --rotate normal --output DisplayPort-1 --rate 143.91 --mode 2560x1440 --pos 0x0 --rotate left --output HDMI-A-0 --scale-from 2560x1440 --scale 2x2 --rate 60 --mode 1920x1080 --same-as DisplayPort-0 --rotate inverted && ~/Scripts/huion.sh
