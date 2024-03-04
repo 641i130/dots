@@ -11,17 +11,16 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nix"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "snowflake"; # Define your hostname.
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Enable networking
   networking.networkmanager.enable = true;
 
@@ -34,7 +33,6 @@
       "en_US.UTF-8/UTF-8"
       "ja_JP.UTF-8/UTF-8"
     ];
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -45,7 +43,8 @@
     LC_PAPER = "en_US.UTF-8";
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
-  };
+   };
+
   i18n.inputMethod.enabled = "fcitx5";
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -59,12 +58,11 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = false;
+  services.printing.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
-  nixpkgs.config.pulseaudio = true; # enable needed for polybar
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -83,45 +81,43 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.caret = {
+  users.users.gpierson = {
     isNormalUser = true;
-    description = "caret";
+    description = "Galileo";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
-      kate
-      thunderbird
     ];
   };
-
-  # Enable automatic login for the user.
-  #services.xserver.displayManager.autoLogin.user = "caret";
-
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    open-vm-tools
+  environment.systemPackages = with pkgs; 
+let
+      polybar = pkgs.polybar.override {
+        i3Support = true;
+      };
+    in
+  [
+    polybar
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vscode
+    gdb
     ranger
     lf
     wget
-    discord
     neovim
     polkit
     polkit-kde-agent
     gsimplecal
-    discord
     i3
     kitty
     kitty-themes
     kitty-img
     zsh
-    oh-my-zsh
-    zsh-autosuggestions
     gnome.gdm
     dunst
     bind
@@ -137,17 +133,14 @@
     yt-dlp
     imagemagick
     zathura
-    signal-desktop
-    telegram-desktop
-    element-desktop
     cron
     obsidian
     neofetch
     redshift
     curl
     wget
-    keepassxc
     libreoffice-still
+    arandr
     xorg.xrandr
     conda
     git
@@ -165,12 +158,35 @@
     i3
     picom
     rofi
-    polybar
     usbutils
+    subversion
+    minicom
+    screen
+    autorandr
+    killall
+    lxappearance
+    lm_sensors
+    i3lock-fancy-rapid
+    pavucontrol
+    cifs-utils
+    xlsfonts
   ];
 
   fonts.packages = with pkgs; [
+    siji
+    nerdfonts
+    font-awesome
     noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-cjk
+    noto-fonts-color-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    proggyfonts
     fira-mono
     fira-code
     carlito
@@ -183,39 +199,11 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
-  
-  /*
-  fonts.fontconfig.ultimate.enable = true;
-  
-  font.fontconfig.defaultFonts = {
-    monospace = [
-      "DejaVu Sans Mono"
-      "IPAGothic"
-    ];
-    sansSerif = [
-      "DejaVu Sans"
-      "IPAPGothic"
-    ];
-    serif = [
-      "DejaVu Serif"
-      "IPAPMincho"
-    ];
-  };
-  */
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
- 
-  # List services that you want to enable:
 
- systemd = {
+  systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
       wantedBy = [ "graphical-session.target" ];
@@ -232,13 +220,27 @@
     };
   };
 
-  
-
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
+
+  # Some programs need SUID wrappers, can be configured further or are
+  # started in user sessions.
+  # programs.mtr.enable = true;
+  # programs.gnupg.agent = {
+  #   enable = true;
+  #   enableSSHSupport = true;
+  # };
+
+  # List services that you want to enable:
+
+  # Enable the OpenSSH daemon.
+  # services.openssh.enable = true;
+
+  # Open ports in the firewall.
+  # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
