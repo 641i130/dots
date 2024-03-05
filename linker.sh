@@ -14,3 +14,6 @@ rm /home/$USER/.zshrc 2>/dev/null
 rm /home/$USER/.zshenv 2>/dev/null
 rm /home/$USER/.Xresources 2>/dev/null
 ln -s /home/$USER/dots/home/{*,.*} /home/$USER/ 
+
+# Link folder
+ln -s /home/$USER/dots/Scripts /home/$USER/Scripts
