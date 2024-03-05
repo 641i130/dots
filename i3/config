@@ -205,7 +205,8 @@ bindsym $mod+Shift+o move workspace to output up
 
 # Lock i3
 #bindsym $mod+Shift+l exec i3lock -c 000000
-bindsym $mod+Shift+l exec ~/Scripts/lock.sh
+#bindsym $mod+Shift+l exec ~/Scripts/lock.sh
+bindsym $mod+Shift+l exec i3lock-fancy-rapid 5 6
 #exec xautolock -detectsleep -time 5 -locker "~/Scripts/lock.sh" -notify 30 -notifier "notify-send -u critical -t 10000 -- 'locking screen in 30 seconds'"
 
 
