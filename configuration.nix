@@ -180,6 +180,7 @@ let
     pciutils
     xorg.xf86videoamdgpu
     nvtop-amd
+    htop
   ];
 
   fonts.packages = with pkgs; [

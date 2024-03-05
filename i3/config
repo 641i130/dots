@@ -226,10 +226,6 @@ bindsym --release $mod+period exec dolphin
 # Screenshot Script sadly it mutes audio sometimes
 bindsym --release $mod+shift+S exec ~/Scripts/ss.sh
 
-# Hide wallpaper
-exec_always feh --bg-fill ~/Pictures/wp.jpg
-bindsym --release $mod+shift+w exec feh --bg-fill ~/Pictures/wp.jpg
-
 #exec_always ~/Scripts/wallpaper.sh hutao
 #bindsym --release $mod+shift+w exec ~/Scripts/wallpaper-single.sh
 #bindsym --release $mod+shift+d exec ~/Scripts/dailyjournal.sh
@@ -253,7 +249,7 @@ exec_always fcitx -d
 #exec_always ~/Scripts/dailyjournal.sh
 #exec_always /usr/lib/kdeconnectd
 #exec_always firewall-applet
-#exec_always ~/Scripts/videowallpaper.sh
+exec_always ~/Scripts/display.sh
 
 #border_radius 10
 bindsym $mod+b exec i3-msg gaps inner all toggle 50
