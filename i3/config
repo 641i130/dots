@@ -189,11 +189,6 @@ bindsym $mod+i scratchpad show
 # Quick key for starting Firefox
 bindsym $mod1+Shift+f exec firefox
 
-# Quick key for starting Discord
-#bindsym $mod1+shift+d exec discord --ignore-gpu-blocklist --disable-features=UseOzonePlatform --enable-features=VaapiVideoDecoder --use-gl=desktop --enable-gpu-rasterization --enable-zero-copy --no-sandbox
-bindsym $mod1+shift+d exec discord 
-
-
 # PICOM
 bindsym $mod+Shift+x exec ~/Scripts/picom-toggle.sh
 exec_always ~/Scripts/picom-toggle.sh
@@ -204,7 +199,7 @@ bindsym $mod+Shift+a move workspace to output left
 bindsym $mod+Shift+o move workspace to output up
 
 # Lock i3
-bindsym $mod+Shift+l exec i3lock-fancy-rapid 5 6
+bindsym $mod+Shift+l exec i3lock-fancy-rapid 10 3
 
 # Open calendar
 bindsym $mod+c exec gsimplecal
