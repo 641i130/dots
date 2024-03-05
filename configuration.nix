@@ -44,17 +44,22 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
    };
-
+  
   i18n.inputMethod.enabled = "fcitx5";
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.windowManager.i3.enable = true;
-
-  # Configure keymap in X11
+  
   services.xserver = {
+    enable = true;
+    displayManager.gdm.enable = true;
+    windowManager.i3.enable = true;
     layout = "us";
-    xkbVariant = "";
+    videoDrivers = [ "amdgpu" ];
+    libinput.enable = true;
+    libinput.touchpad.naturalScrolling = true;
+  };
+
+  services.picom = {
+    enable = true;
+    vSync = true;
   };
 
   # Enable CUPS to print documents.
