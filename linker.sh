@@ -2,7 +2,7 @@
 
 
 # Link folders in the given list
-for folder in dunst i3 polybar redshift rofi; do
+for folder in dunst i3 polybar redshift rofi kitty; do
   rm -rf /home/$USER/.config/$folder/
   mkdir -p /home/$USER/.config/$folder/
   echo "Linking $folder"

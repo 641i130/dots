@@ -103,13 +103,18 @@ let
     in
   [
     polybar
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     vscode
     gdb
     ranger
     lf
     wget
     neovim
+    gcc
+    gnumake
+    desktop-file-utils
+    ripgrep
+    lazygit
+    bottom
     polkit
     polkit-kde-agent
     gsimplecal
@@ -153,6 +158,7 @@ let
     fcitx5-mozc
     fcitx5-configtool
     python3
+    python311Packages.pip
     networkmanagerapplet
     polkit_gnome
     i3
@@ -170,6 +176,10 @@ let
     pavucontrol
     cifs-utils
     xlsfonts
+    materia-theme
+    pciutils
+    xorg.xf86videoamdgpu
+    nvtop-amd
   ];
 
   fonts.packages = with pkgs; [
@@ -196,6 +206,7 @@ let
     source-code-pro
     ttf_bitstream_vera
   ];
+
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
   ];
@@ -233,7 +244,15 @@ let
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
+  # This is using a rec (recursive) expression to set and access XDG_BIN_HOME within the expression
+  # For more on rec expressions see https://nix.dev/tutorials/first-steps/nix-language#recursive-attribute-set-rec
+  environment.sessionVariables = rec {
+    QT_QPA_PLATFORMTHEME="qt5ct";
+    GTK_IM_MODULE="fcitx";
+    QT_IM_MODULE="fcitx";
+    XMODIFIERS="@im=fcitx";
+    SDL_IM_MODULE="fcitx";
+  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
