@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "snowflake"; # Define your hostname.
+  networking.hostName = "yukibana"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -52,15 +52,17 @@
     displayManager.gdm.enable = true;
     windowManager.i3.enable = true;
     layout = "us";
+    xkbVariant = "dvorak,";
+    xkbOptions = "grp:win_space_toggle";
     videoDrivers = [ "amdgpu" ];
     libinput.enable = true;
     libinput.touchpad.naturalScrolling = true;
   };
 
-  services.picom = {
-    enable = true;
-    vSync = true;
-  };
+  #services.picom = {
+  #  enable = true;
+  #  vSync = true;
+  #};
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -139,6 +141,7 @@ let
     sxiv
     feh
     xclip
+    flameshot
     scrot
     yt-dlp
     imagemagick
@@ -184,8 +187,20 @@ let
     materia-theme
     pciutils
     xorg.xf86videoamdgpu
+    xpra
     nvtop-amd
     htop
+    cmatrix
+    file
+    appimage-run
+    polkit
+    unetbootin
+    gparted
+    exfatprogs
+    ntfs3g
+    gnome.nautilus
+    libsForQt5.qt5ct
+    unzip
   ];
 
   fonts.packages = with pkgs; [
@@ -211,10 +226,12 @@ let
     kochi-substitute
     source-code-pro
     ttf_bitstream_vera
+    xorg.xbacklight
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
+    "python3.11-django-3.1.14"
   ];
 
   programs.zsh.enable = true;
@@ -239,7 +256,9 @@ let
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
-  
+  services.devmon.enable = true;
+  services.gvfs.enable = true;
+  services.udisks2.enable = true;
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
 

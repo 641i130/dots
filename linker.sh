@@ -17,3 +17,7 @@ ln -s /home/$USER/dots/home/{*,.*} /home/$USER/
 
 # Link folder
 ln -s /home/$USER/dots/Scripts /home/$USER/Scripts
+
+# Symbol link neovim to vi and vim locations
+sudo ln -s `which nvim` /usr/bin/vim
+sudo ln -s `which nvim` /usr/bin/vi 
