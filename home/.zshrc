@@ -117,3 +117,4 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+alias com='sudo minicom -b 11520 -D /dev/ttyUSB0 -c on'

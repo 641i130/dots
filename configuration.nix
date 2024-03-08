@@ -70,7 +70,13 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+  nixpkgs.config.pulseaudio = true;
+  hardware.pulseaudio.extraConfig = "load-module module-combine-sink";
   security.rtkit.enable = true;
+  sound.mediaKeys = {
+    enable = true;
+    volumeStep = "5%";
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -91,7 +97,7 @@
   users.users.gpierson = {
     isNormalUser = true;
     description = "Galileo";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
     ];
@@ -138,6 +144,10 @@ let
     mpvScripts.mpris
     mpv
     playerctl
+    alsa-utils
+    pamixer
+    xbindkeys
+    xorg.xev
     sxiv
     feh
     xclip
@@ -189,6 +199,7 @@ let
     xorg.xf86videoamdgpu
     xpra
     nvtop-amd
+    btop
     htop
     cmatrix
     file
@@ -199,6 +210,8 @@ let
     exfatprogs
     ntfs3g
     gnome.nautilus
+    rdesktop
+    freerdp
     libsForQt5.qt5ct
     unzip
   ];
@@ -253,6 +266,12 @@ let
       };
     };
   };
+  # DOCKER
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+  users.extraGroups.docker.members = [ "gpierson" ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
