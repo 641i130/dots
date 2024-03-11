@@ -52,8 +52,8 @@
     displayManager.gdm.enable = true;
     windowManager.i3.enable = true;
     layout = "us";
-    xkbVariant = "dvorak,";
-    xkbOptions = "grp:win_space_toggle";
+    #xkbVariant = "dvorak,";
+    #xkbOptions = "grp:win_space_toggle";
     videoDrivers = [ "amdgpu" ];
     libinput.enable = true;
     libinput.touchpad.naturalScrolling = true;
@@ -97,7 +97,7 @@
   users.users.gpierson = {
     isNormalUser = true;
     description = "Galileo";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" "dialout" "tty"];
     packages = with pkgs; [
       firefox
     ];
@@ -117,6 +117,9 @@ let
   [
     polybar
     vscode
+    android-tools
+    android-studio
+    scrcpy
     gdb
     ranger
     lf
@@ -178,6 +181,7 @@ let
     python3
     python311Packages.pip
     networkmanagerapplet
+    wireguard-tools
     polkit_gnome
     i3
     picom
@@ -189,6 +193,10 @@ let
     autorandr
     killall
     lxappearance
+    capitaine-cursors
+    libsForQt5.qt5ct
+    libsForQt5.breeze-icons
+    libsForQt5.ark
     lm_sensors
     i3lock-fancy-rapid
     pavucontrol
@@ -212,6 +220,7 @@ let
     gnome.nautilus
     rdesktop
     freerdp
+    dbeaver
     libsForQt5.qt5ct
     unzip
   ];
