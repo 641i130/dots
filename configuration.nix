@@ -23,6 +23,10 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  
+  # environment vars
+  # environment.variables.GLFW_IM_MODULE = "ibus";
+  environment.variables.QT_QPA_PLATFORMTHEME="qt5ct";
 
   # Set your time zone.
   time.timeZone = "America/Chicago";
@@ -33,6 +37,13 @@
       "en_US.UTF-8/UTF-8"
       "ja_JP.UTF-8/UTF-8"
     ];
+  i18n.inputMethod.enabled = "fcitx5";
+  i18n.inputMethod.fcitx5.addons = [
+    pkgs.fcitx5-mozc
+    pkgs.fcitx5-gtk
+    pkgs.fcitx5-configtool
+  ];
+  
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -45,18 +56,15 @@
     LC_TIME = "en_US.UTF-8";
    };
   
-  i18n.inputMethod.enabled = "fcitx5";
-  
   services.xserver = {
     enable = true;
     displayManager.gdm.enable = true;
     windowManager.i3.enable = true;
+    desktopManager.runXdgAutostartIfNone = true;
     layout = "us";
-    #xkbVariant = "dvorak,";
-    #xkbOptions = "grp:win_space_toggle";
     videoDrivers = [ "amdgpu" ];
-    libinput.enable = true;
-    libinput.touchpad.naturalScrolling = true;
+    #libinput.enable = true;
+    #libinput.touchpad.naturalScrolling = true;
   };
 
   #services.picom = {
@@ -176,8 +184,6 @@ let
     dolphin
     qt5ct
     fcitx5
-    fcitx5-mozc
-    fcitx5-configtool
     python3
     python311Packages.pip
     networkmanagerapplet
@@ -197,6 +203,7 @@ let
     libsForQt5.qt5ct
     libsForQt5.breeze-icons
     libsForQt5.ark
+    ungoogled-chromium
     lm_sensors
     i3lock-fancy-rapid
     pavucontrol
@@ -250,6 +257,24 @@ let
     ttf_bitstream_vera
     xorg.xbacklight
   ];
+  
+  # Set default fonts
+  fonts.fontconfig.defaultFonts = {
+    monospace = [
+      "Hack Nerd Font"
+      "Noto Sans Mono CJK JP"
+    ];
+
+    sansSerif = [
+      "Noto Sans"
+      "Noto Sans CJK JP"
+    ];
+
+    serif = [
+      "Noto Serif"
+      "Noto Serif CJK JP"
+    ];
+  };
 
   nixpkgs.config.permittedInsecurePackages = [
     "electron-25.9.0"
@@ -299,13 +324,6 @@ let
   # };
   # This is using a rec (recursive) expression to set and access XDG_BIN_HOME within the expression
   # For more on rec expressions see https://nix.dev/tutorials/first-steps/nix-language#recursive-attribute-set-rec
-  environment.sessionVariables = rec {
-    QT_QPA_PLATFORMTHEME="qt5ct";
-    GTK_IM_MODULE="fcitx";
-    QT_IM_MODULE="fcitx";
-    XMODIFIERS="@im=fcitx";
-    SDL_IM_MODULE="fcitx";
-  };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.

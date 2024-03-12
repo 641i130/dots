@@ -240,15 +240,8 @@ exec_always --no-startup-id rfkill unblock bluetooth
 
 # Start up anthy / ibus
 exec --no-startup-id lxsession
-exec_always anthy_agent
 exec_always dunst
-exec_always redshift -x
-exec_always thunderbird
-#exec_always ibus-daemon -drx
-exec_always fcitx -d
-#exec_always ~/Scripts/dailyjournal.sh
-#exec_always /usr/lib/kdeconnectd
-#exec_always firewall-applet
+#exec_always fcitx5 -d
 exec_always ~/Scripts/display.sh
 
 #border_radius 10
