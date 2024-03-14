@@ -223,12 +223,9 @@ bindsym $mod+minus exec xcalib -invert -alter
 # Launch Dolphin file explorer
 bindsym --release $mod+period exec dolphin
 
-# Screenshot Script sadly it mutes audio sometimes
-bindsym --release $mod+shift+S exec ~/Scripts/ss.sh
-
-#exec_always ~/Scripts/wallpaper.sh hutao
-#bindsym --release $mod+shift+w exec ~/Scripts/wallpaper-single.sh
-#bindsym --release $mod+shift+d exec ~/Scripts/dailyjournal.sh
+# flameshot is best
+bindsym --release $mod+shift+s exec flameshot gui
+exec --no-startup-id flameshot
 
 bindsym --release $mod+shift+t exec typora todo.md
 
@@ -237,11 +234,9 @@ bindsym --release $mod+shift+v exec ~/Scripts/clipboard_type.sh
 
 # Un block bluetooth
 exec_always --no-startup-id rfkill unblock bluetooth
-
 # Start up anthy / ibus
 exec --no-startup-id lxsession
 exec_always dunst
-#exec_always fcitx5 -d
 exec_always ~/Scripts/display.sh
 
 #border_radius 10
@@ -249,7 +244,7 @@ bindsym $mod+b exec i3-msg gaps inner all toggle 50
 #default_border none
 focus_follows_mouse yes
 
-# Weird thing?
+# Weird thing? maybe not????
 exec dbus-update-activation-environment --systemd DBUS_SESSION_BUS_ADDRESS DISPLAY XAUTHORITY &
 
 # polkit

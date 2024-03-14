@@ -25,7 +25,6 @@
   networking.networkmanager.enable = true;
   
   # environment vars
-  # environment.variables.GLFW_IM_MODULE = "ibus";
   environment.variables.QT_QPA_PLATFORMTHEME="qt5ct";
 
   # Set your time zone.
@@ -37,12 +36,15 @@
       "en_US.UTF-8/UTF-8"
       "ja_JP.UTF-8/UTF-8"
     ];
-  i18n.inputMethod.enabled = "fcitx5";
-  i18n.inputMethod.fcitx5.addons = [
-    pkgs.fcitx5-mozc
-    pkgs.fcitx5-gtk
-    pkgs.fcitx5-configtool
-  ];
+  #i18n.inputMethod.enabled = "fcitx5";
+  #i18n.inputMethod.fcitx5.addons = [
+  #  pkgs.fcitx5-mozc
+  #  pkgs.fcitx5-gtk
+  #  pkgs.fcitx5-configtool
+  #];
+  # environment.variables.GLFW_IM_MODULE = "ibus";
+  i18n.inputMethod.enabled = "ibus";
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [mozc];
   
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
@@ -125,6 +127,7 @@ let
   [
     polybar
     vscode
+    godot_4
     android-tools
     android-studio
     scrcpy
@@ -164,6 +167,7 @@ let
     xclip
     flameshot
     scrot
+    maim
     yt-dlp
     imagemagick
     zathura
@@ -183,7 +187,6 @@ let
     rsync
     dolphin
     qt5ct
-    fcitx5
     python3
     python311Packages.pip
     networkmanagerapplet
@@ -256,22 +259,23 @@ let
     source-code-pro
     ttf_bitstream_vera
     xorg.xbacklight
+    krita
   ];
   
   # Set default fonts
   fonts.fontconfig.defaultFonts = {
     monospace = [
-      "Hack Nerd Font"
+      "Fira Mono"
       "Noto Sans Mono CJK JP"
     ];
 
     sansSerif = [
-      "Noto Sans"
+      "Fira Mono"
       "Noto Sans CJK JP"
     ];
 
     serif = [
-      "Noto Serif"
+      "Fira Mono"
       "Noto Serif CJK JP"
     ];
   };
