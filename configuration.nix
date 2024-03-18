@@ -25,8 +25,15 @@
   networking.networkmanager.enable = true;
   
   # environment vars
+  nixpkgs.config.qt5 = {
+    enable = true;
+    platformTheme = "qt5ct"; 
+      style = {
+        package = pkgs.utterly-nord-plasma;
+        name = "Utterly Nord Plasma";
+      };
+  };
   environment.variables.QT_QPA_PLATFORMTHEME="qt5ct";
-
   # Set your time zone.
   time.timeZone = "America/Chicago";
 
@@ -127,6 +134,10 @@ let
   [
     polybar
     vscode
+    ghidra
+    wireshark
+    mitmproxy
+    python311Packages.mitmproxy-wireguard
     godot_4
     android-tools
     android-studio
@@ -206,6 +217,8 @@ let
     libsForQt5.qt5ct
     libsForQt5.breeze-icons
     libsForQt5.ark
+    libsForQt5.qtstyleplugin-kvantum
+    libsForQt5.qt5ct
     ungoogled-chromium
     lm_sensors
     i3lock-fancy-rapid
