@@ -136,6 +136,7 @@ let
     vscode
     ghidra
     wireshark
+    filezilla
     mitmproxy
     python311Packages.mitmproxy-wireguard
     godot_4

@@ -199,7 +199,7 @@ bindsym $mod+Shift+a move workspace to output left
 bindsym $mod+Shift+o move workspace to output up
 
 # Lock i3
-bindsym $mod+Shift+l exec i3lock-fancy-rapid 20 3
+bindsym $mod+Shift+l exec i3lock-fancy-rapid 40 3
 
 # Open calendar
 bindsym $mod+c exec gsimplecal
