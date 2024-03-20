@@ -136,6 +136,10 @@ let
     vscode
     ghidra
     wireshark
+    ffuf
+    radamsa
+    tmux
+    avahi
     filezilla
     mitmproxy
     python311Packages.mitmproxy-wireguard
@@ -327,6 +331,7 @@ let
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.avahi.enable = true;
   services.devmon.enable = true;
   services.gvfs.enable = true;
   services.udisks2.enable = true;
