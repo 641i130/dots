@@ -162,6 +162,8 @@ let
     polkit-kde-agent
     gsimplecal
     i3
+    alacritty
+    krita
     kitty
     kitty-themes
     kitty-img
@@ -202,6 +204,11 @@ let
     openssh
     rsync
     dolphin
+    resvg
+    libsForQt5.ffmpegthumbs
+    nufraw-thumbnailer
+    taglib
+    libsForQt5.kdegraphics-thumbnailers
     qt5ct
     python3
     python311Packages.pip
