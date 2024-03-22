@@ -176,6 +176,8 @@ let
     mpvScripts.mpris
     mpv
     mpd
+    mpd-mpris
+    mpd-discord-rpc
     playerctl
     alsa-utils
     pamixer
@@ -203,6 +205,7 @@ let
     git
     sshfs
     openssh
+    inetutils
     rsync
     dolphin
     resvg
